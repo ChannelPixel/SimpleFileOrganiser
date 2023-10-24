@@ -60,7 +60,6 @@ namespace SimpleFileOrganiser {
             {
                 if (!IsLoadableStaticImage(existingFileInfos[fileListIndex]))
                 {
-                    newFileSuffix++;
                     continue;
                 }
 
@@ -118,7 +117,9 @@ namespace SimpleFileOrganiser {
         {
             try
             {
-                if (fileInfo.Extension.ToLower() == ".gif") return false;
+                if (fileInfo.Extension.ToLower() == ".gif" 
+                    || fileInfo.Extension.ToLower() == ".webm"
+                    || fileInfo.Extension.ToLower() == ".webp")return false;
                 Image image = Image.FromFile(fileInfo.FullName);
                 //Image loadImage = await Image.FromFile(filePath);
                 return true;
