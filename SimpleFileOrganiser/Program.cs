@@ -117,9 +117,12 @@ namespace SimpleFileOrganiser {
         {
             try
             {
-                if (fileInfo.Extension.ToLower() == ".gif" 
+                if (
+                    fileInfo.Extension.ToLower() == ".gif" 
                     || fileInfo.Extension.ToLower() == ".webm"
-                    || fileInfo.Extension.ToLower() == ".webp")return false;
+                    || fileInfo.Extension.ToLower() == ".webp"
+                    || fileInfo.Extension.ToLower() == ".mov"
+                    || fileInfo.Extension.ToLower() == ".mp4") return false;
                 Image image = Image.FromFile(fileInfo.FullName);
                 //Image loadImage = await Image.FromFile(filePath);
                 return true;
