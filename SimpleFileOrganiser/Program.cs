@@ -46,16 +46,32 @@ namespace SimpleFileOrganiser {
                 Directory.CreateDirectory(newDirectoryFolderPath); ;
             }
 
-            DirectMove(newFolderName, existingFileInfos, newDirectoryFolderPath);
+            bool validFileSuffix = false;
+            int newFileSuffix = 0;
+            while (!validFileSuffix)
+            {
+                Console.WriteLine("Enter a valid file suffix. Enter blank to default to 0 :: ");
+                var suffixInput = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(suffixInput))
+                {
+                    validFileSuffix = true;
+                }
+                else
+                {
+                    validFileSuffix = int.TryParse(suffixInput, out newFileSuffix);
+                }
+            }
+
+            DirectMove(newFileSuffix, newFolderName, existingFileInfos, newDirectoryFolderPath);
 
             //SubDirectMove(newFolderName, filesPerNewFolder, existingFileInfos, newDirectoryFolderPath);
             Console.WriteLine("Bing bang boom.");
             return;
         }
 
-        private static void DirectMove(string newFolderName, List<FileInfo> existingFileInfos, string newDirectoryFolderPath)
+        private static void DirectMove(int newFileSuffix, string newFolderName, List<FileInfo> existingFileInfos, string newDirectoryFolderPath)
         {
-            var newFileSuffix = 0;
+            //var newFileSuffix = 2381;
             for (int fileListIndex = 0; fileListIndex < existingFileInfos.Count; fileListIndex++)
             {
                 if (!IsLoadableStaticImage(existingFileInfos[fileListIndex]))
